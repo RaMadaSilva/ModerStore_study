@@ -1,5 +1,4 @@
-﻿using Flunt.Notifications;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using ModernStore.Domain.Entities;
 
@@ -36,7 +35,7 @@ namespace ModernStore.Infra.Mapping
                 .IsRequired()
                 .HasMaxLength(25);
 
-            builder.HasOne(x => x.User); 
+            builder.HasOne(x => x.User).WithOne(); 
         }
     }
 }
