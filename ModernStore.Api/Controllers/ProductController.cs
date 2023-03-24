@@ -16,8 +16,8 @@ namespace ModernStore.Api.Controllers
             _repository = repository;
         }
 
-        [HttpPost]
-        [Route("product")]
+        //[HttpPost]
+        //[Route("product")]
         //public IActionResult Post([FromBody]RegisterProductCommand comand)
         //{
         //    _repository.Save(comand); 

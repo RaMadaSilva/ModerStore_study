@@ -25,6 +25,7 @@ namespace ModernStore.Api
         }
 
          private static void ConfigureServices(WebApplicationBuilder builder) {
+
             builder.Services.AddControllers();
 
             builder.Services.AddDbContext<ModernStoreDbContext>();
