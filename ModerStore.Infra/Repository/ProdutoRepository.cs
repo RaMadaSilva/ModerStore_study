@@ -23,7 +23,9 @@ namespace ModernStore.Infra.Repository
         public IEnumerable<ICommandResult> GetProducts()
         {
             var products = new List<GetListProductCommandResult>();
-            products.AddRange(_context.Products.AsNoTracking().Select(x => new GetListProductCommandResult(x.Id, x.Name, x.Image, x.Price)));
+            products.AddRange(_context.Products
+                .AsNoTracking()
+                .Select(x => new GetListProductCommandResult(x.Id, x.Name, x.Image, x.Price)));
             return products; 
         }
 
