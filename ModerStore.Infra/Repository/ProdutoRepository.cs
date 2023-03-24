@@ -17,10 +17,8 @@ namespace ModernStore.Infra.Repository
             _context = context;
         }
 
-        public Product Get(Guid id)
-        {
-            return _context.Products.AsNoTracking().FirstOrDefault(x => x.Id == id); 
-        }
+        public Product Get(Guid id) 
+            =>_context.Products.AsNoTracking().FirstOrDefault(x => x.Id == id); 
 
         public IEnumerable<ICommandResult> GetProducts()
         {
@@ -30,9 +28,6 @@ namespace ModernStore.Infra.Repository
         }
 
         public void Save(Product product)
-        {
-            _context.Products.Add(product);
-            _context.SaveChanges(); //passar para o unite of Work
-        }
+            => _context.Products.Add(product);
     }
 }

@@ -11,14 +11,11 @@ namespace ModernStore.Infra.Repository
     {
         private readonly ModernStoreDbContext _context;
 
-        public CustomerRepository(ModernStoreDbContext context)
-        {
-            _context = context;
-        }
+        public CustomerRepository(ModernStoreDbContext context) 
+            => _context = context;
+        
         public bool DocumentExists(string document)
-        {
-            return _context.Customers.Any(x=>x.Document.Number ==document);
-        }
+            => _context.Customers.Any(x=>x.Document.Number ==document);
 
         public Customer Get(Guid id)
         {
@@ -46,15 +43,12 @@ namespace ModernStore.Infra.Repository
             return result; 
         }
 
-        public void Save(Customer customer)
-        {
-            _context.Customers.Add(customer);
-            _context.SaveChanges(); //passará para o unite of Work
-        }
+        public void Save(Customer customer) 
+            => _context.Customers.Add(customer);
+        
 
-        public void Update(Customer customer)
-        {
-            _context.Entry(customer).State = EntityState.Modified; 
-        }
+        public void Update(Customer customer) 
+            => _context.Entry(customer).State = EntityState.Modified; 
+        
     }
 }

@@ -8,13 +8,10 @@ namespace ModernStore.Infra.Repository
     {
         private readonly ModernStoreDbContext _context;
         public OrderRepository(ModernStoreDbContext context)
-        {
-            _context = context;
-        }
+            => _context = context;
+        
         public void Save(Order order)
-        {
-            _context.Orders.Add(order);
-            _context.SaveChanges(); //passar para o unite of Work
-        }
+            =>_context.Orders.Add(order);
+        
     }
 }
