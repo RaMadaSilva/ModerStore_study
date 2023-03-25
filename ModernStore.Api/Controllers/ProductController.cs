@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ModernStore.Domain.Command;
+using ModernStore.Domain.CommandHendler;
 using ModernStore.Domain.Repository;
-using ModernStore.Infra.Context;
-using ModernStore.Shared.Command;
+using ModernStore.Shared.UniteOfWork;
 
 namespace ModernStore.Api.Controllers
 {
@@ -11,17 +11,32 @@ namespace ModernStore.Api.Controllers
     public class ProductController : ControllerBase
     {
         private readonly IproductRepository _repository; 
-        public ProductController(IproductRepository repository)
+        private readonly IUniteOfWork _uniteOfWork;
+        private readonly ProductCommandHendler _hendler; 
+        public ProductController(IproductRepository repository, 
+            IUniteOfWork uniteOfWork, 
+            ProductCommandHendler hendler)
         {
+            _uniteOfWork = uniteOfWork;
+            _hendler = hendler;
             _repository = repository;
         }
 
-        //[HttpPost]
-        //[Route("product")]
-        //public IActionResult Post([FromBody]RegisterProductCommand comand)
-        //{
-        //    _repository.Save(comand); 
-        //}
+        [HttpPost]
+        [Route("product")]
+        public IActionResult Post([FromBody] RegisterProductCommand comand)
+        {
+           var result =  _hendler.Handler(comand);
+            if (_hendler.IsValid)
+            {
+                _uniteOfWork.Commit();
+                return Ok(result);
+            }
+            else
+            {
+                return BadRequest(_hendler.Notifications); 
+            }
+        }
 
         [HttpGet]
         [Route("product")]
