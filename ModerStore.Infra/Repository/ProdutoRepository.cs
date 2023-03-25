@@ -25,7 +25,7 @@ namespace ModernStore.Infra.Repository
             var products = new List<GetListProductCommandResult>();
             products.AddRange(_context.Products
                 .AsNoTracking()
-                .Select(x => new GetListProductCommandResult(x.Id, x.Name, x.Image, x.Price)));
+                .Select(x => new GetListProductCommandResult(x.Id, x.Name, x.Image, x.Price, x.QuantityOnHand)));
             return products; 
         }
 

@@ -35,7 +35,7 @@ namespace ModernStore.Infra.Mapping
                 .IsRequired()
                 .HasMaxLength(25);
 
-            builder.HasOne(x => x.User).WithOne(); 
+            builder.HasOne(x => x.User); 
         }
     }
 }
