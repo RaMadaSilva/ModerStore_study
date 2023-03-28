@@ -1,6 +1,10 @@
+using ModernStore.Domain.CommandHendler;
 using ModernStore.Domain.Repository;
 using ModernStore.Infra.Context;
 using ModernStore.Infra.Repository;
+using ModernStore.Infra.UniteOfWork;
+using ModernStore.Shared.Command;
+using ModernStore.Shared.UniteOfWork;
 using System.Runtime.CompilerServices;
 
 namespace ModernStore.Api
@@ -31,7 +35,9 @@ namespace ModernStore.Api
             builder.Services.AddDbContext<ModernStoreDbContext>();
             builder.Services.AddTransient<IproductRepository, ProdutoRepository>(); 
             builder.Services.AddTransient<ICustomerRepository, CustomerRepository>();
-            builder.Services.AddTransient<IOrderRepository, OrderRepository>(); 
+            builder.Services.AddTransient<IOrderRepository, OrderRepository>();
+            builder.Services.AddTransient<IUniteOfWork, UniteOfWork>();
+            builder.Services.AddTransient<ProductCommandHendler, ProductCommandHendler>(); 
         }
     }
 }

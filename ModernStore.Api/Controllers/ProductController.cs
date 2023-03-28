@@ -26,7 +26,7 @@ namespace ModernStore.Api.Controllers
         [Route("product")]
         public IActionResult Post([FromBody] RegisterProductCommand comand)
         {
-           var result =  _hendler.Handler(comand);
+           var result = _hendler.Handler(comand);
             if (_hendler.IsValid)
             {
                 _uniteOfWork.Commit();

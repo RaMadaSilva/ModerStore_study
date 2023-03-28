@@ -30,7 +30,7 @@ namespace ModernStore.Domain.CommandHendler
             }
 
             //criar o produto e salva no banco de dados
-            product = new Product(Command.Nome, 
+            product = new Product(Command.Name, 
                     Command.Image, 
                     Command.Price, 
                     Command.QuantityOnHand);
