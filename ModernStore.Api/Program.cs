@@ -33,6 +33,7 @@ namespace ModernStore.Api
             builder.Services.AddControllers();
 
             builder.Services.AddDbContext<ModernStoreDbContext>();
+
             builder.Services.AddTransient<IproductRepository, ProdutoRepository>(); 
             builder.Services.AddTransient<ICustomerRepository, CustomerRepository>();
             builder.Services.AddTransient<IOrderRepository, OrderRepository>();
