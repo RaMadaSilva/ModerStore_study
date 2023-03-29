@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ModernStore.Domain.Services
 {
-    public interface ImailService
+    public interface IEmailService
     {
         void Send(string name, string email, string subject, string body);
     }

@@ -1,11 +1,12 @@
+using Microsoft.EntityFrameworkCore;
 using ModernStore.Domain.CommandHendler;
 using ModernStore.Domain.Repository;
+using ModernStore.Domain.Services;
 using ModernStore.Infra.Context;
 using ModernStore.Infra.Repository;
+using ModernStore.Infra.Services;
 using ModernStore.Infra.UniteOfWork;
-using ModernStore.Shared.Command;
 using ModernStore.Shared.UniteOfWork;
-using System.Runtime.CompilerServices;
 
 namespace ModernStore.Api
 {
@@ -14,6 +15,7 @@ namespace ModernStore.Api
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
 
             // Add services to the container.
             ConfigureServices(builder); 
@@ -32,13 +34,16 @@ namespace ModernStore.Api
 
             builder.Services.AddControllers();
 
-            builder.Services.AddDbContext<ModernStoreDbContext>();
+            builder.Services.AddDbContext<ModernStoreDbContext>(options=> options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnections")));
 
             builder.Services.AddTransient<IproductRepository, ProdutoRepository>(); 
             builder.Services.AddTransient<ICustomerRepository, CustomerRepository>();
             builder.Services.AddTransient<IOrderRepository, OrderRepository>();
             builder.Services.AddTransient<IUniteOfWork, UniteOfWork>();
             builder.Services.AddTransient<ProductCommandHendler, ProductCommandHendler>(); 
+            builder.Services.AddTransient<CustomerCommandHandler, CustomerCommandHandler>();
+            builder.Services.AddTransient<IEmailService, EmailService>(); 
+            
         }
     }
 }

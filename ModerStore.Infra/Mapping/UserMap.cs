@@ -15,7 +15,7 @@ namespace ModernStore.Infra.Mapping
                 .IsRequired();
             builder.Property(x => x.Passeword)
                 .IsRequired()
-                .HasMaxLength(20); 
+                .HasMaxLength(50); 
             builder.Property(x => x.Active)
                 .IsRequired();
         }

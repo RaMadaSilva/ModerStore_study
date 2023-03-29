@@ -23,9 +23,9 @@ namespace ModernStore.Api.Controllers
             _handler = handler;
         }
 
-        [HttpPut]
+        [HttpPost]
         [Route("customer")]
-        public ActionResult PutCustomer([FromBody] RegisterCustomerCommand command) 
+        public ActionResult PostCustomer([FromBody] RegisterCustomerCommand command) 
         {
             var result = _handler.Handler(command);
 
@@ -38,6 +38,30 @@ namespace ModernStore.Api.Controllers
             {
                 return BadRequest(_handler.Notifications); 
             }
+        }
+        [HttpGet]
+        [Route("customerByUserName/{userName?}")]
+        public ActionResult GetCustomerByUserName([FromRoute] string userName)
+        {
+            return  Ok(_repository.Get(userName)); 
+        }
+
+        [HttpGet]
+        [Route("customer/{id:}")]
+        public ActionResult GetCustomerById([FromRoute] Guid id)
+        {
+            return Ok(_repository.Get(id));
+        }
+
+        [HttpPut]
+        [Route("customer")]
+        public ActionResult UpdateCustomer([FromBody] UpdateCustomerCommand command)
+        {
+            var result = _handler.Handler(command);
+            _uniteOfWork.Commit(); 
+
+            return Ok(result);
+
         }
 
     }

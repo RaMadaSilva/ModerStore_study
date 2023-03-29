@@ -1,5 +1,6 @@
 ﻿using Flunt.Validations;
 using ModernStore.Shared.Entities;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace ModernStore.Domain.Entities
@@ -32,14 +33,16 @@ namespace ModernStore.Domain.Entities
         {
             if (string.IsNullOrEmpty(pass))
                 return "";
-            var password = (pass + "|r25m11s8j5"); 
-            var md5 = System.Security.Cryptography.MD5.Create();
-            var data = md5.ComputeHash(Encoding.Default.GetBytes(password));
-            var sbstring = new StringBuilder();
-            foreach (var t in data)
-                sbstring.Append(t.ToString("2x"));
+             
+            var md5 = MD5.Create();
+            var bytes = Encoding.ASCII.GetBytes(pass);
+            var hash = md5.ComputeHash(bytes);
 
-            return sbstring.ToString(); 
+            var sbstring = new StringBuilder();
+            foreach (var t in hash)
+                sbstring.Append(t.ToString("x"));
+
+            return sbstring.ToString().Substring(0,20); 
 
         }
     }

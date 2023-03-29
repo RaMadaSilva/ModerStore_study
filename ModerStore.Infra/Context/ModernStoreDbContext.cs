@@ -1,6 +1,5 @@
 ﻿using Flunt.Notifications;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure.Internal;
 using ModernStore.Domain.Entities;
 using ModernStore.Infra.Mapping;
 
@@ -8,17 +7,12 @@ namespace ModernStore.Infra.Context
 {
     public class ModernStoreDbContext : DbContext 
     {
-        public ModernStoreDbContext()
-            : base(GetOptions())
+        public ModernStoreDbContext(DbContextOptions<ModernStoreDbContext> options)
+            : base(options)
         {  
             
         }
-        private static DbContextOptions GetOptions()
-        {
-            var builder = new DbContextOptionsBuilder();
-            builder.UseSqlServer(@"Server=RMATEIA-SILVA, 1433;Database=ModernStore;User Id=sa;Password=1q2w3e4r@#$; Trusted_Connection=False; TrustServerCertificate=True;");
-            return builder.Options;
-        }
+
 
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Order> Orders { get; set; }

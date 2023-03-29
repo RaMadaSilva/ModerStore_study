@@ -13,10 +13,10 @@ namespace ModernStore.Domain.CommandHendler
             ICommandHendler<UpdateCustomerCommand>, ICommandHendler<RegisterCustomerCommand>
     {
         private readonly ICustomerRepository _customerRepository;
-        private readonly ImailService _mailService;
+        private readonly IEmailService _mailService;
 
         public CustomerCommandHandler(ICustomerRepository customerRepository, 
-            ImailService imailService)
+            IEmailService imailService)
         {
             _customerRepository = customerRepository;
             _mailService = imailService;
