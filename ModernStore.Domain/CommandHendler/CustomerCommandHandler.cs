@@ -66,6 +66,9 @@ namespace ModernStore.Domain.CommandHendler
             var customer = new Customer(name, Command.BirthDate, email, document, user); 
 
             AddNotifications(customer.Notifications);
+            AddNotifications(document.Notifications);
+            AddNotifications(email.Notifications);
+            
 
             if (IsValid)
                 _customerRepository.Save(customer);

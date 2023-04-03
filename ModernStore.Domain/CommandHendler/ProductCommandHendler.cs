@@ -7,7 +7,8 @@ using ModernStore.Shared.Command;
 
 namespace ModernStore.Domain.CommandHendler
 {
-    public class ProductCommandHendler : Notifiable<Notification>, ICommandHendler<RegisterProductCommand>
+    public class ProductCommandHendler : Notifiable<Notification>, 
+        ICommandHendler<RegisterProductCommand>
     {
         private readonly IproductRepository _productRepository;
 
