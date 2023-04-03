@@ -29,16 +29,19 @@ namespace ModernStore.Infra.Repository
 
         public ICommandResult Get(string userName)
         {
-            var result = _context.Customers
+            var result = _context
+               .Customers
                .Include(x => x.User)
                .AsNoTracking()
-               .Select(x => new
-                        GetCustomerCommandResult(x.Name.ToString(),
-                               x.Document.Number,
-                               x.Email.Adress,
-                               x.User.UserName,
-                               x.User.Passeword,
-                               x.User.Active)).FirstOrDefault(x => x.UserName == userName);
+               .Where(x=>x.User.UserName==userName)
+               .Select(x => new GetCustomerCommandResult(
+                    x.Name.ToString(),
+                    x.Document.Number,
+                    x.Email.Adress,
+                    x.User.UserName,
+                    x.User.Passeword,
+                    x.User.Active))
+               .FirstOrDefault();
 
             return result; 
         }

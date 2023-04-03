@@ -1,5 +1,4 @@
 ﻿using ModernStore.Domain.Entities;
-using ModernStore.Domain.ValueObjects;
 using ModernStore.Shared.Command;
 
 namespace ModernStore.Domain.Repository
@@ -10,7 +9,6 @@ namespace ModernStore.Domain.Repository
         void Update(Customer customer);
         void Save(Customer customer);
         bool DocumentExists(string document);
-
         ICommandResult Get(string userName); 
     }
 }
