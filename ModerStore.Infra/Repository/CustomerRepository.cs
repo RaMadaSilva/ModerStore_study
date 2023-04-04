@@ -22,7 +22,8 @@ namespace ModernStore.Infra.Repository
             var customer = _context.Customers
                 .Include(x=>x.User)
                 .AsNoTracking()
-                .FirstOrDefault(x=>x.Id ==id);
+                .Where(x => x.User.Id == id)
+                .FirstOrDefault();
 
             return customer; 
         }
