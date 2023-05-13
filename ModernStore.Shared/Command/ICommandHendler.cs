@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace ModernStore.Shared.Command
 {
-    public interface ICommandHendler<T> where T: ICommand
+    public interface ICommandHendler<T> where T : ICommand
     {
-        ICommandResult Handler(T Command); 
+        ICommandResult Handler(T Command);
     }
 }
